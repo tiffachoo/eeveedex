@@ -1,5 +1,6 @@
 <template>
 	<main 
+		v-if="current.name"
 		:key="current.name"
 		:class="current.name"
 		class="main"
@@ -46,7 +47,7 @@
 					{{ getLanguage(current.species.names, 'ja').name }}
 				</span>
 				<img 
-					:src="`${imageUrl}dream/${current.id}.png`" 
+					:src="require(`@/assets/dream/${current.id}.png`)" 
 					:alt="current.name"
 					class="header-image"
 				>
@@ -217,8 +218,7 @@ export default {
 			current: {
 				species: []
 			},
-			evolutions: {},
-			imageUrl: 'https://raw.githubusercontent.com/tiffachoo/pokesprites/master/pokemon/'
+			evolutions: {}
 		}
 	},
 	computed: {
@@ -295,7 +295,7 @@ export default {
 		getIconImageUrl(url) {
 			const arr = url.split('/');
 			const id = arr[arr.length - 2];
-			return `${this.imageUrl}icon/${id}.png`;
+			return require(`@/assets/icon/${id}.png`);
 		}
 	}
 }
